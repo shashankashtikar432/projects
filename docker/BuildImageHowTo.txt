@@ -1,0 +1,21 @@
+One way of building image is to construct a docker file with docker commands
+
+Another way of building the docker file is to start an image and build it manually
+along the way commit changes to the image and build up on it.
+e.g. 
+Step 1: Start a new container by issuing following commands
+
+docker run -ti --name=base-container ubuntu
+Explaination: Starts a container with name base-container uses image named ubuntu to start the container
+
+Step 2: Modify the container by issuing following
+apt update && apt install -y nodejs
+
+validate node.js installed in the container by issuing following commands
+node -e 'console.log("Hello world!")'
+
+Step 3: Commit the changes to the container by issuing 
+docker container commit -m "Add node" base-container node-base
+
+Command saves the current state of the container base-container as new image name node-base 
+and adds text specified by -m flag as comment for the commit
